@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-15px) rotate(2deg); }
+  75% { transform: translateY(15px) rotate(-2deg); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-white overflow-x-hidden;
+    background: linear-gradient(45deg, #000000, #002626, #000000, #002626);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 min-h-screen flex items-center;
+  }
+  
+  .section-title {
+    @apply text-6xl font-bold bg-gradient-to-r from-teal-300 via-teal-500 to-teal-300 
+           bg-clip-text text-transparent mb-8 relative;
+    text-shadow: 0 0 30px rgba(20, 184, 166, 0.3);
+  }
+  
+  .btn-primary {
+    @apply px-6 sm:px-8 py-3 sm:py-4 bg-teal-600 rounded-xl sm:rounded-2xl text-white 
+           transition-all duration-300 hover:bg-teal-500 
+           hover:shadow-lg hover:shadow-teal-500/25 focus:outline-none focus:ring-2 
+           focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-black;
+  }
+
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .nav-link {
+    @apply relative overflow-hidden;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-teal-500 transform scale-x-0 origin-left 
+           transition-transform duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  input, textarea {
+    @apply bg-transparent text-white placeholder-white/50 outline-none;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0 30px rgb(0 0 0 / 0.5) inset !important;
+    box-shadow: 0 0 0 30px rgb(0 0 0 / 0.5) inset !important;
+  }
+
+  /* Custom Scrollbar Styles */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-black/20 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-teal-500/50 rounded-full hover:bg-teal-400/50 transition-colors duration-300;
+  }
+  
+  /* Firefox Scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(20 184 166 / 0.5) rgb(0 0 0 / 0.2);
+  }
+  
+  @keyframes menuItemFade {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
